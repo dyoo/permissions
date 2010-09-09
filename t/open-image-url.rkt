@@ -28,6 +28,3 @@
      (lambda ()
        (delete-file temp-file-path)))))
 
-
-
-(printf "open-image-url run time invoked\n")
