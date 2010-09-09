@@ -8,10 +8,17 @@
          racket/port
          racket/class
          racket/gui/base
-         racket/contract)
+         racket/contract
+         (for-syntax racket/base))
 
 
 (require-permission "permission:network")
+
+
+(begin-for-syntax
+  (printf "open-image-url compile time!\n"))
+
+(printf "open-image-url run time\n")
 
 
 (provide/contract [open-image-url (string? . -> . (is-a?/c image-snip%))])
