@@ -1,6 +1,6 @@
 #lang racket/base
 
-(require "../attach-permission.rkt"
+(require "../require-permission.rkt"
          net/url
          racket/list
          racket/file
@@ -10,6 +10,11 @@
          racket/gui/base
          racket/contract)
 
+
+(require-permission "permission:network")
+
+
+(provide/contract [open-image-url (string? . -> . (is-a?/c image-snip%))])
 (define (open-image-url a-url-string)
   (let* ([url (string->url a-url-string)]
          [ip (get-pure-port url)]
@@ -24,7 +29,5 @@
        (delete-file temp-file-path)))))
 
 
-(attach-permission open-image-url "permission:network")
 
-
-(provide/contract [open-image-url (string? . -> . (is-a?/c image-snip%))])
+(printf "open-image-url run time invoked\n")
