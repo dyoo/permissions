@@ -9,16 +9,14 @@
 
 (define-runtime-path record.rkt "record.rkt")
 
+(define ns (make-base-empty-namespace))
+
 
 ;; query: module-path -> (listof string)
 ;; Given a module, see what permissions it is declaring.
 (define (query a-module-path)
   (let ([resolved-path (resolve-module-path a-module-path #f)])
-    (parameterize ([current-namespace (make-base-empty-namespace)])
+    (parameterize ([current-namespace ns])
       (dynamic-require a-module-path (void)) ;; get the compile-time code running.
       ((dynamic-require-for-syntax record.rkt 'lookup) resolved-path))))
   
-
-#;(query "t/open-image-url.rkt")
-#;(query "t/foo.rkt")
-#;(query "t/play-sound.rkt")

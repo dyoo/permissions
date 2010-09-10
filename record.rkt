@@ -1,13 +1,13 @@
 #lang racket/base
 
-(provide record-permission! lookup)
+(provide record! lookup)
 
 (define-struct record (path permissions))
 
 (define records '())
 
-;; record-permission: path (listof string) -> void
-(define (record-permission! a-path permissions)
+;; record!: path (listof string) -> void
+(define (record! a-path permissions)
   (set! records (cons (make-record a-path permissions)
                       records)))
 
