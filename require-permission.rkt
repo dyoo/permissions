@@ -14,9 +14,8 @@
            (begin-for-syntax
              (let* ([this-module (variable-reference->resolved-module-path (#%variable-reference))]
                     [key (resolved-module-path-name this-module)])
-               (record-permission key (list (#%datum perms) ...))))
+               (record-permission! key (list perms ...))))
            (void))))]))
-
 
 
 
