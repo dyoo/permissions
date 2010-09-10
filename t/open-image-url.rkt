@@ -15,12 +15,6 @@
 (require-permission "permission:network")
 
 
-(begin-for-syntax
-  (printf "open-image-url compile time!\n"))
-
-(printf "open-image-url run time\n")
-
-
 (provide/contract [open-image-url (string? . -> . (is-a?/c image-snip%))])
 (define (open-image-url a-url-string)
   (let* ([url (string->url a-url-string)]

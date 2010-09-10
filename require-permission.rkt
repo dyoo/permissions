@@ -11,11 +11,12 @@
                    [src (syntax-source stx)])
        (syntax/loc stx
          (begin
-           #;(provide (for-syntax permissions))
            (begin-for-syntax
-             (printf "introduced by require-permission\n")
-             (record-permission (quote src) (list (#%datum perms) ...))
-             #;(define permissions (list (#%datum perms) ...))))))]))
+             (let* ([this-module (variable-reference->resolved-module-path (#%variable-reference))]
+                    [key (resolved-module-path-name this-module)])
+               (record-permission key (list (#%datum perms) ...))))
+           (void))))]))
+
 
 
 

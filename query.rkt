@@ -9,10 +9,8 @@
 ;; Given a module, see what permissions it is declaring.
 (define (query-module-permissions a-module-path)
   (parameterize ([current-namespace (make-base-empty-namespace)])
-    (namespace-require/expansion-time a-module-path)
-    (printf "~s\n" (namespace-mapped-symbols))
-    #;(namespace-variable-value 'records)
-    #;(namespace-variable-value 'permissions)))
+    (dynamic-require a-module-path (void)) ;; get the compile-time code running.
+    (dynamic-require-for-syntax "record.rkt" 'records)))
 
 
 (query-module-permissions "t/open-image-url.rkt")
