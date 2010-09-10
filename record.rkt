@@ -1,20 +1,10 @@
 #lang racket/base
-(require racket/contract)
 
-(define (path-or-symbol? p)
-  (or (path? p)
-      (symbol? p)))
-
-(provide/contract
- [record-permission! (path-or-symbol? (listof string?) . -> . any)]
- #;[lookup (path-or-symbol? . -> . (listof string?))])
-(provide lookup)
-
+(provide record-permission! lookup)
 
 (define-struct record (path permissions))
 
 (define records '())
-
 
 ;; record-permission: path (listof string) -> void
 (define (record-permission! a-path permissions)
